@@ -9,6 +9,11 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
+  interface AppModal {
+    'closeModal': () => Promise<void>;
+    'openModal': () => Promise<void>;
+    'title': string;
+  }
   interface MyComponent {
     /**
     * The first name
@@ -28,17 +33,29 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLAppModalElement extends Components.AppModal, HTMLStencilElement {}
+  var HTMLAppModalElement: {
+    prototype: HTMLAppModalElement;
+    new (): HTMLAppModalElement;
+  };
+
   interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
   var HTMLMyComponentElement: {
     prototype: HTMLMyComponentElement;
     new (): HTMLMyComponentElement;
   };
   interface HTMLElementTagNameMap {
+    'app-modal': HTMLAppModalElement;
     'my-component': HTMLMyComponentElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface AppModal extends JSXBase.HTMLAttributes<HTMLAppModalElement> {
+    'onClose'?: (event: CustomEvent<boolean>) => void;
+    'onOpen'?: (event: CustomEvent<boolean>) => void;
+    'title'?: string;
+  }
   interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
     /**
     * The first name
@@ -55,6 +72,7 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'app-modal': AppModal;
     'my-component': MyComponent;
   }
 }

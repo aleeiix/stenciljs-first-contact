@@ -1,4 +1,5 @@
 import { Config } from '@stencil/core';
+import { sass } from '@stencil/sass'
 
 export const config: Config = {
   namespace: 'stenciljs-first-contact',
@@ -14,5 +15,7 @@ export const config: Config = {
       type: 'www',
       serviceWorker: null // disable service workers
     }
+  ], plugins: [
+    sass()
   ]
 };
