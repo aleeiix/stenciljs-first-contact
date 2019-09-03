@@ -10,7 +10,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface AppButton {
-    'clickButton': () => Promise<void>;
+    'clickButtonEmit': () => Promise<void>;
     'text': string;
   }
   interface AppModal {
@@ -42,7 +42,7 @@ declare global {
 
 declare namespace LocalJSX {
   interface AppButton extends JSXBase.HTMLAttributes<HTMLAppButtonElement> {
-    'onClick'?: (event: CustomEvent<void>) => void;
+    'onClickButton'?: (event: CustomEvent<void>) => void;
     'text'?: string;
   }
   interface AppModal extends JSXBase.HTMLAttributes<HTMLAppModalElement> {

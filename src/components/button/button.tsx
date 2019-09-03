@@ -8,16 +8,16 @@ import { Component, Prop, Event, EventEmitter, Method, h } from '@stencil/core';
 export class Button {
 
   @Prop() text: string = '';
-  @Event() click: EventEmitter<void>;
+  @Event() clickButton: EventEmitter<void>;
 
   @Method()
-  clickButton() {
-    this.click.emit();
+  async clickButtonEmit() {
+    this.clickButton.emit();
   }
 
   render() {
   	return (
-        	<button onClick={() => this.clickButton()}>{this.text}</button>
+        	<button onClick={() => this.clickButtonEmit()}>{this.text}</button>
     	);
 	}
 
