@@ -1,13 +1,21 @@
-div {
-    background-color: #ddd;
-    padding: 16px;
-    border-radius: 8px;
+app-modal {
+    display: none;
 
-    h1 {
-        text-align: center;
+    &.visible {
+        display: block;
     }
 
-    div.modal-footer {
-        text-align: end;
+    div {
+        background-color: #ddd;
+        padding: 16px;
+        border-radius: 8px;
+    
+        h1 {
+            text-align: center;
+        }
+    
+        div.modal-footer {
+            text-align: end;
+        }
     }
 }

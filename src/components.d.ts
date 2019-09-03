@@ -9,71 +9,51 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
+  interface AppButton {
+    'clickButton': () => Promise<void>;
+    'text': string;
+  }
   interface AppModal {
     'closeModal': () => Promise<void>;
+    'header': string;
     'openModal': () => Promise<void>;
-    'title': string;
-  }
-  interface MyComponent {
-    /**
-    * The first name
-    */
-    'first': string;
-    /**
-    * The last name
-    */
-    'last': string;
-    /**
-    * The middle name
-    */
-    'middle': string;
   }
 }
 
 declare global {
 
 
+  interface HTMLAppButtonElement extends Components.AppButton, HTMLStencilElement {}
+  var HTMLAppButtonElement: {
+    prototype: HTMLAppButtonElement;
+    new (): HTMLAppButtonElement;
+  };
+
   interface HTMLAppModalElement extends Components.AppModal, HTMLStencilElement {}
   var HTMLAppModalElement: {
     prototype: HTMLAppModalElement;
     new (): HTMLAppModalElement;
   };
-
-  interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
-  };
   interface HTMLElementTagNameMap {
+    'app-button': HTMLAppButtonElement;
     'app-modal': HTMLAppModalElement;
-    'my-component': HTMLMyComponentElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface AppButton extends JSXBase.HTMLAttributes<HTMLAppButtonElement> {
+    'onClick'?: (event: CustomEvent<void>) => void;
+    'text'?: string;
+  }
   interface AppModal extends JSXBase.HTMLAttributes<HTMLAppModalElement> {
+    'header'?: string;
     'onClose'?: (event: CustomEvent<boolean>) => void;
     'onOpen'?: (event: CustomEvent<boolean>) => void;
-    'title'?: string;
-  }
-  interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
-    /**
-    * The first name
-    */
-    'first'?: string;
-    /**
-    * The last name
-    */
-    'last'?: string;
-    /**
-    * The middle name
-    */
-    'middle'?: string;
   }
 
   interface IntrinsicElements {
+    'app-button': AppButton;
     'app-modal': AppModal;
-    'my-component': MyComponent;
   }
 }
 

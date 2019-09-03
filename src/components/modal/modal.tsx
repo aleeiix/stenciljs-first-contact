@@ -7,7 +7,7 @@ import { Component, Prop, State, Element, Event, EventEmitter, Method, h } from 
 
 export class Modal {
 
-  @Prop() title: string = '';
+  @Prop() header: string = '';
   @State() isOpen: boolean = false;
 
   @Element() element: HTMLElement;
@@ -16,15 +16,15 @@ export class Modal {
   @Event() close: EventEmitter<boolean>;
 
   @Method()
-  openModal(): void {
+  async openModal() {
     this.showModal(true);
     this.open.emit(true);
   }
 
   @Method()
-  closeModal(): void {
-    if (!this.isOpen) {
-      this.showModal(false);
+  async closeModal() {
+    if (this.isOpen) {
+      this.showModal(true);
       this.close.emit(true);
     }
   }
@@ -35,13 +35,13 @@ export class Modal {
   
   showModal(show: boolean): void {
     this.isOpen = !show;
-    this.element.classList.toggle('off', this.isOpen);
+    this.element.classList.toggle('visible', this.isOpen);
   }
 
   render() {
   	return (
         	<div>
-                <h1>{this.title}</h1>
+                <h1>{this.header}</h1>
 
             	<slot />
 
